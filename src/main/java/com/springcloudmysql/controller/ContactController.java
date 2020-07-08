@@ -64,7 +64,23 @@ public class ContactController {
 		return ResponseEntity.ok().body(savedObj);
 	}
 
-	
-	//TODO @Luina to write this method
-	//@PutMapping
+	//Put mapping changes
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<Contact> updateContact(@PathVariable long id, 
+			@RequestBody Contact contact) {
+
+		Optional<Contact> optionalObj = repository.findById(id);
+		if (optionalObj.isPresent()) {
+			Contact contactobj = optionalObj.get();
+			contactobj.setName(contact.getName());
+			contactobj.setEmail(contact.getEmail());
+			contactobj.setPhone(contact.getPhone());
+			repository.save(contactobj);
+			return ResponseEntity.ok().body(contactobj);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+		
+	}
+	 
 }
