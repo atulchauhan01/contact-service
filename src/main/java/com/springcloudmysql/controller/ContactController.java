@@ -20,6 +20,7 @@ import com.springcloudmysql.repository.ContactRepository;
 @RequestMapping({ "/contacts" })
 public class ContactController {
 
+	//Autowiring repository
 	@Autowired
 	private ContactRepository repository;
 
